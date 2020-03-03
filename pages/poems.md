@@ -1,5 +1,5 @@
  ---
- layout: default
+ layout: page
  title: Poems
  permalink: /poems/
  weight: 3
