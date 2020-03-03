@@ -5,6 +5,16 @@ image: /Barca0809.jpg
 description: A data-driven analysis of Barcelona's historic 08/09 season.
 ---
 
+## Preface
+
+I'm going to try to explain this in the most intuitive/least mathsy way I can, and do so with reference to specific football examples. Sometimes I'll veer into technical jargon and unnecessarily dense explanation, other times I'll omit detail you're interested in. 
+
+Whenever there are necessarily technical sections, I'll try my best to explain them in football-relevant, intuitive terms. Hopefully you'll get something out of it even if you don't fully understand every single aspect of the methodology. 
+
+If you want me to clarify anything or you think I've got something wrong or you think I've missed something out, please let me know via Twitter & I'll try my best to help out.
+
+
+
 # Introduction to possession models
 
 The basic goal of possession models is to ascribe some 'value' to every single action in a possession. The goalscorer is not solely responsible for a goal being scored -- all of the actions that led up to the ball crossing the line had some impact on the outcome. Here's a little imaginary sequence I'll refer to throughout this introduction:
@@ -15,13 +25,19 @@ Traditionally, you'd record the fact that the striker scored, the winger assiste
 
 This notion that we shouldn't reward *only* goalscorers & assisters for goals has led to some increasingly involved ways of using event data to attach a value to each action in a possession sequence -- what follows is my take on how you might do this for a single season's worth of data.
 
-First, though, I'll give a brief overview of some of the existing models for valuing actions with event data. I'll ignore tracking data approaches, such as Liverpool's expected possession value model (see the Tim Waskett RI christmas lecture for a hint at what they're doing) or [this paper](http://www.sloansportsconference.com/content/decomposing-the-immeasurable-sport-a-deep-learning-expected-possession-value-framework-for-soccer/) from the 2019 Sloan conference.
+First, though, I'll give a brief overview of some of the existing models for valuing actions with event data. Because I don't have access to any tracking data, I'll ignore tracking data-based approaches such as Liverpool's expected possession value model (see the Tim Waskett RI christmas lecture for a hint at what they're doing) or [this paper](http://www.sloansportsconference.com/content/decomposing-the-immeasurable-sport-a-deep-learning-expected-possession-value-framework-for-soccer/) from the 2019 Sloan conference.
 
 As far as I know, the earliest and one of the most simple ways of doing this was Thom Lawrence's [xGChain/xGBuildup](https://statsbomb.com/2018/08/introducing-xgchain-and-xgbuildup/). To compute the xGC for a player, you just add up the xG values of all possessions the player was involved in. To get to xGB, you exclude the xGs of all shots taken or assisted by the player. This scheme gives equal weight to every action in the sequence -- the keeper's roll out is given as much value as the 50 yard ping. Despite being so simple, the results are utterly sensible & useful for gauging the importance of a player to a team's attacking play. As always, though, it's interesting to try to extend this simple approach and see what happens when we get a bit more granular.
 
-The most obvious limitation of xGC/xGB is its assumption that all actions in a possession are created equal. There are a few ways to deal with this. The first way is to use locations on the pitch to guess at the value of an action -- in general, you'd expect actions higher up the pitch & closer to the goal to be more valuable. You might then credit the CB in the recurring example with having progressed the ball from a low-value area to a high-value area, and likewise with the winger for his cross. This is broadly the approach taken by both Nils Mackay in his [xG-added model](https://mackayanalytics.nl/2016/11/11/what-is-a-possession-based-model-and-why-does-it-matter/) & Karun Singh in his [expected threat (xT) model](https://karun.in/blog/expected-threat.html). 
+The most obvious limitation of xGC/xGB is its assumption that all actions in a possession are created equal. There are a few ways to deal with this. The first way is to use locations on the pitch to guess at the value of an action -- in general, you'd expect actions that get your team higher up the pitch & closer to the goal to be more valuable. You might then credit the CB in the recurring example with having progressed the ball from a low-value area to a high-value area, and likewise with the winger for his cross. This is broadly the approach taken by both Nils Mackay in his [xG-added model](https://mackayanalytics.nl/2016/11/11/what-is-a-possession-based-model-and-why-does-it-matter/) & Karun Singh in his [expected threat (xT) model](https://karun.in/blog/expected-threat.html). 
 
 For what it's worth, I think these two models are probably the most sensible out there in terms of appropriate levels of granularity & computational burden. If you're looking to implement this kind of possession value model in your own analytics work, these two approaches are likely to be completely fine. They are essentially special cases of the work I'm going to outline below. Something that would be really interesting (which I haven't done) is an ablation study -- can I remove some of the more complex elements from my model and still achieve similar performance? I suspect that the answer is an emphatic 'yes', but I'll leave that for future work.
 
+One fundamental assumption of these location-based models is the Markov assumption: the value of a position on the pitch is independent of what has already happened in the possession, and it's static (it's always equally as valuable to be in the right half-space). For example, in our recurring example, the value of the winger's cross is not changed by the fact that it came from a long diagonal from the centre back rather than after a prolonged period of build up.
+
+This assumption is probably fair if we also know the positions of all the other players on the pitch -- Markov models are probably valid if we've got tracking data. Maybe the best way to think about this is in terms of pictures. If I give you a static image of a match situation, like this one from [Last Row View](https://twitter.com/lastrowview) (rise up shepherd and follow!), you can give me a pretty decent estimate of how dangerous the situation is.
+
+![alt text](/LRV_im.jpg "Logo Title Text 1")
 
 
+My inkling is that we should use the history of the possession to value actions in the absence of tracking data.
