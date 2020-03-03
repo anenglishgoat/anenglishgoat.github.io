@@ -1,7 +1,7 @@
 ---
 name: Deep learning with possession sequences
 tools: [R, keras, tensorflow]
-image: https://www.sketchappsources.com/resources/source-image/movie-badges-jurajjurik.png
+image: Barca0809.jpg
 description: A data-driven analysis of Barcelona's historic 08/09 season.
 ---
 
