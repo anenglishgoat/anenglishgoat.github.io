@@ -6,15 +6,6 @@ weight: 3
 ---
 
 # **About Me**
+I have recently submitted my PhD thesis in Applied Mathematics at the University of Birmingham. My PhD work focuses on statistical and probabilistic methods for single-cell data. I have also consulted in statistics/mathematical modelling for Procter & Gamble and a cash logistics startup. I'll (hopefully) be joining Dave Smith's group as a postdoc to work on methods for improving the outcomes of fertility treatment using data and video.
 
-Hi I am **{{ site.author.name }}** :wave:,<br>
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-
-<div class="row">
-{% include about/skills.html title="Programming Skills" source=site.data.programming-skills %}
-{% include about/skills.html title="Other Skills" source=site.data.other-skills %}
-</div>
-
-<div class="row">
-{% include about/timeline.html %}
-</div>
+Outside of acadaemia, I like football, poker, poems, Twitter and guitars. I'll post some football-related stuff here. My main interests in football analytics are (eventually) making tracking data freely available through collaboration on open source computer vision projects, trying to encourage people to care about uncertainty and regularisation, and horribly over-ambitious possession models.
