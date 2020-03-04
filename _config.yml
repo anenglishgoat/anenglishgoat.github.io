@@ -71,6 +71,3 @@ exclude:
   - CONTRIBUTING.md
   - LICENSE
   - "*.log"
-
-katex:
-  path_to_js: "./katex.min.js"
