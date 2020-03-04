@@ -36,9 +36,9 @@ As far as I know, the earliest and one of the most simple ways of doing this was
 
 The most obvious limitation of xGC/xGB is its assumption that all actions in a possession are created equal. There are a few ways to deal with this. The first way is to use locations on the pitch to guess at the value of an action -- in general, you'd expect actions that get your team higher up the pitch & closer to the goal to be more valuable. You might then credit the CB in the recurring example with having progressed the ball from a low-value area to a high-value area, and likewise with the winger for his cross. This is broadly the approach taken by both Nils Mackay in his [possession-based model](https://mackayanalytics.nl/2016/11/11/what-is-a-possession-based-model-and-why-does-it-matter/) & Karun Singh in his [expected threat (xT) model](https://karun.in/blog/expected-threat.html).
 
-Here's an image I've lifted from Nils Mackay's blog post. White locations are the most dangerous places to have possession, blue are the least.
+Here's an image I've lifted from Nils Mackay's blog post. White locations are the most dangerous places to have possession, blue are the least. There'll be one of these later on as a sanity check on my own model.
 
-![alt text](https://github.com/anenglishgoat/anenglishgoat.github.io/raw/master/mackay.JPG "A static match situation")
+![alt text](https://github.com/anenglishgoat/anenglishgoat.github.io/raw/master/mackay.png "Nils Mackay's possession value")
 
 
 For what it's worth, I think these two models are probably the most sensible out there in terms of appropriate levels of granularity & computational burden. If you're looking to implement this kind of possession value model in your own analytics work, these two approaches are likely to be completely fine. They are essentially special cases of the work I'm going to outline below. Something that would be really interesting (which I haven't done) is an ablation study -- can I remove some of the more complex elements from my model and still achieve similar performance? I suspect that the answer is an emphatic 'yes', but I'll leave that for future work.
