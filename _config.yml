@@ -72,6 +72,5 @@ exclude:
   - LICENSE
   - "*.log"
 
-markdown: kramdown
-kramdown:
-    math_engine: mathjax
+katex:
+  path_to_js: "./katex.min.js"
