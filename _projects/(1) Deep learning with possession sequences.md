@@ -84,7 +84,7 @@ I'm going to have to use some shorthand here to stop things getting too cluttere
 
 ##### VAEP
 
-In the VAEP model, every action has an *offensive* and a *defensive* value. The offensive value is 
+In the VAEP model, every action has an *offensive* and a *defensive* value. The offensive value is g
 
 
 ## Model overview
