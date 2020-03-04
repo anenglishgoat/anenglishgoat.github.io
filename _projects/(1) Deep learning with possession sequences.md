@@ -80,7 +80,7 @@ Since these two models are the most similar to the one I'll use to analyse the B
 
 ##### Notation
 
-I'm going to have to use some shorthand here to stop things getting too cluttered. Whenever I write $P(\textrm{something})$
+I'm going to have to use some shorthand here to stop things getting too cluttered. Whenever I write $P(\textrm{a thing})$, I mean the  probability that $\textrm{a thing}$ happens.
 
 
 ##### VAEP
