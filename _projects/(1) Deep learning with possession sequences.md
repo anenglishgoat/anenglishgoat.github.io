@@ -3,6 +3,7 @@ name: Deep learning with possession sequences
 tools: [R, keras, tensorflow]
 image: /Barca0809.jpg
 description: A data-driven analysis of Barcelona's historic 08/09 season.
+mathjax: true
 ---
 
 ## Preface
@@ -90,3 +91,4 @@ In the VAEP model, every action has an *offensive* and a *defensive* value. The 
 ## Model overview
 
 ## Analysing Barca
+
