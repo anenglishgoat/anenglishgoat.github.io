@@ -17,6 +17,9 @@ Also, this is going to be long. Brace yourselves. Hopefully this table of conten
 
 ### Contents
   1. [Intro to possession models](#introduction-to-possession-models)
+     - [xGChain/xGBuildup](#xgchain-and-xgbuildup)
+     - [Location-based models](#location-based-models)
+     - [Context-based models](#context-based-models)
   2. [Model overview](#model-overview)
   3. [Analysing Barca](#analysing-barca)
 
@@ -36,7 +39,11 @@ This notion that we shouldn't reward *only* goalscorers & assisters for goals ha
 
 First, though, I'll give a brief overview of some of the existing models for valuing actions with event data. Because I don't have access to any tracking data, I'll ignore tracking data-based approaches such as Liverpool's expected possession value model (see the Tim Waskett RI christmas lecture for a hint at what they're doing) or [this paper](http://www.sloansportsconference.com/content/decomposing-the-immeasurable-sport-a-deep-learning-expected-possession-value-framework-for-soccer/) from the 2019 Sloan conference.
 
+#### xGChain and xGBuildup
+
 As far as I know, the earliest and one of the most simple ways of doing this was Thom Lawrence's [xGChain/xGBuildup](https://statsbomb.com/2018/08/introducing-xgchain-and-xgbuildup/). To compute the xGC for a player, you just add up the xG values of all possessions the player was involved in. To get to xGB, you exclude the xGs of all shots taken or assisted by the player. This scheme gives equal weight to every action in the sequence -- the keeper's roll out is given as much value as the 50 yard ping. Despite being so simple, the results are utterly sensible & useful for gauging the importance of a player to a team's attacking play. As always, though, it's interesting to try to extend this simple approach and see what happens when we get a bit more granular.
+
+#### Location-based models
 
 The most obvious limitation of xGC/xGB is its assumption that all actions in a possession are created equal. There are a few ways to deal with this. The first way is to use locations on the pitch to guess at the value of an action -- in general, you'd expect actions that get your team higher up the pitch & closer to the goal to be more valuable. You might then credit the CB in the recurring example with having progressed the ball from a low-value area to a high-value area, and likewise with the winger for his cross. This is broadly the approach taken by both Nils Mackay in his [possession-based model](https://mackayanalytics.nl/2016/11/11/what-is-a-possession-based-model-and-why-does-it-matter/) (which is presumably pretty similar to the one Opta are using currently?) & Karun Singh in his extremely neat [expected threat (xT) model](https://karun.in/blog/expected-threat.html).
 
@@ -62,12 +69,22 @@ Ideally you'd want to know the velocities of the players too, but I'd say you're
 
 But I don't have tracking data. The only thing that shows up in the event data is that number 37 (on the ball) has just dribbled past an opposition player in that location. There are lots of possible situations in which this might happen and the threat is different each time -- maybe it's come from a counter, he's dribbled past the last man and is now clean through on goal; maybe the white team are sat in a low block, the striker has come to press, and number 37 has skipped past him but the yellows are not really any closer to scoring. In this case, maybe information about what has happened previously in the possession is helpful for us to get a better idea about how dangerous the current situation is.
 
+#### Context-based models
+
 This is where the next pair of models come in. The model from [Thom Lawrence's Statsbomb conference talk](https://www.youtube.com/watch?v=5j-Ij5_3Cs8) (watch!) and Tom Decroos et al.'s [VAEP](https://www.kdd.org/kdd2019/accepted-papers/view/actions-speak-louder-than-goals-valuing-player-actions-in-soccer) (read!) model both use past actions to compute the value of an action within a possession sequence.
 
 The idea is that this context can help to fill in at least some of the gaps that result from not having tracking data. If we know that number 37's dribble in the above example came after lots of passing around the defence and a few probing forward passes that came straight back out, there's a good chance it's less dangerous than if it follows a long ball from a defender. We're not getting to the same level of richness as the tracking data, but we're at least closer.
 
 Since these two models are the most similar to the one I'll use to analyse the Barca data below, I'll spend a bit of time going over how they work.
 
+##### Notation
+
+I'm going to have to use some shorthand here to stop things getting too cluttered. Whenever I write $P(\textrm{something})$
+
+
+##### VAEP
+
+In the VAEP model, every action has an *offensive* and a *defensive* value. The offensive value is 
 
 
 ## Model overview
