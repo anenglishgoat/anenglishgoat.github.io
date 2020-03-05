@@ -82,11 +82,11 @@ Since these two models are the most similar to the one I'll use to analyse the B
 
 I'm going to have to use a bit of notation now in order to keep things from getting too cluttered. I'll outline it here first & try to explain it further in the accompanying text in the sections below. Firstly, I'm going to be talking quite a lot about probabilities, I'll try to keep the notation for events as intuitive as possible so, for example, I'll write stuff like $P(\textrm{goal})$ to mean 'my estimate of the probability of a goal in the current possession sequence'. 
 
-I'll use a '$|$' to represent conditional probabilities, so $P(\textrm{goal}|\textrm{history})$ will mean 'my estimate of the probability of a goal in this possession, given some information about the preceding actions in the possession'. 
+I'll use a '$\mid$' to represent conditional probabilities, so $P(\textrm{goal}\mid\textrm{history})$ will mean 'my estimate of the probability of a goal in this possession, given some information about the preceding actions in the possession'. 
 
-Sometimes I'll want to condition on multiple things, so I might write $P(\textrm{goal}|\textrm{history},\textrm{current player})$ to mean 'my estimate of the probability of a goal given the preceding actions in the possession *and* the player who's currently on the ball'.
+Sometimes I'll want to condition on multiple things, so I might write $P(\textrm{goal}\mid\textrm{history},\textrm{current player})$ to mean 'my estimate of the probability of a goal given the preceding actions in the possession *and* the player who's currently on the ball'.
 
-These three cases basically correspond to models of different levels of granularity -- the things I'm conditioning on are the things I'm using to predict the probability of a goal in the current possession. So the first case, $P(goal)$, I would just compute as something like $[\textrm{number of goals}] / [\textrm{number of possessions}]$ -- not very granular at all. 
+These three cases basically correspond to models of different levels of granularity -- the things I'm conditioning on are the things I'm using to predict the probability of a goal in the current possession. So the first case, $P(\textrm{goal})$, I would just compute as something like $[\textrm{number of goals}] / [\textrm{number of possessions}]$ -- not very granular at all. 
 
 ##### VAEP
 
